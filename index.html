@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iloilo Trip 🌴 June 12–16</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FBF7F0; --sand: #F0E8D8; --terracotta: #C4623A;
+    --terracotta-light: #E8896A; --terracotta-pale: #FAE8DF;
+    --ocean: #2B6B7A; --ocean-light: #4A8FA0; --ocean-pale: #DDF0F5;
+    --green: #3D7A4A; --green-pale: #DFF0E2;
+    --amber: #B07820; --amber-pale: #FDF3D8;
+    --pink: #c2185b; --pink-pale: #fce4ec;
+    --ink: #1E1810; --ink-muted: #5C4F3A; --ink-faint: #9C8E78;
+    --border: rgba(30,24,16,0.1); --shadow: 0 2px 16px rgba(30,24,16,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; padding-bottom: 120px; }
+
+  .hero { background: var(--ink); color: var(--cream); padding: 36px 20px 28px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 0%, rgba(196,98,58,0.35) 0%, transparent 60%), radial-gradient(ellipse at 10% 100%, rgba(43,107,122,0.3) 0%, transparent 55%); }
+  .hero-inner { position: relative; max-width: 480px; margin: 0 auto; }
+  .hero-label { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--terracotta-light); margin-bottom: 10px; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; line-height: 1.15; margin-bottom: 8px; }
+  .hero-sub { font-size: 14px; color: rgba(251,247,240,0.65); line-height: 1.6; }
+  .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .chip { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 99px; border: 1px solid rgba(251,247,240,0.2); color: rgba(251,247,240,0.75); }
+
+  .nav-wrap { position: sticky; top: 0; z-index: 100; background: var(--ink); padding: 0 20px; border-bottom: 1px solid rgba(251,247,240,0.08); }
+  .nav { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; max-width: 480px; margin: 0 auto; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn { flex-shrink: 0; padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: rgba(251,247,240,0.45); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap; }
+  .nav-btn.active { color: var(--terracotta-light); border-bottom-color: var(--terracotta-light); }
+
+  .content { max-width: 480px; margin: 0 auto; padding: 24px 16px 0; }
+  .day-panel { display: none; }
+  .day-panel.active { display: block; }
+
+  .notice { border-radius: 12px; padding: 12px 14px; font-size: 12px; line-height: 1.6; margin-bottom: 20px; }
+  .n-info { background: var(--ocean-pale); color: var(--ocean); }
+  .n-warn { background: var(--amber-pale); color: var(--amber); }
+  .n-suc  { background: var(--green-pale); color: var(--green); }
+
+  .zone { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
+  .zone::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .card-row { display: flex; gap: 12px; align-items: flex-start; }
+  .card-time { font-size: 11px; font-weight: 500; color: var(--ink-faint); min-width: 52px; padding-top: 2px; flex-shrink: 0; }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.35; margin-bottom: 4px; }
+  .card-note { font-size: 12px; color: var(--ink-muted); line-height: 1.6; }
+  .tip { display: inline-block; margin-top: 7px; font-size: 11px; font-weight: 500; background: var(--green-pale); color: var(--green); padding: 4px 10px; border-radius: 8px; line-height: 1.5; }
+
+  .badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 99px; margin-right: 5px; vertical-align: middle; }
+  .b-fly  { background: var(--ocean-pale); color: var(--ocean); }
+  .b-food { background: var(--terracotta-pale); color: var(--terracotta); }
+  .b-see  { background: var(--amber-pale); color: var(--amber); }
+  .b-cof  { background: var(--sand); color: var(--ink-muted); }
+  .b-cake { background: var(--pink-pale); color: var(--pink); }
+  .b-free { background: var(--sand); color: var(--ink-faint); }
+
+  .choice { background: #fff; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; overflow: hidden; box-shadow: var(--shadow); }
+  .choice-head { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; transition: background .15s; }
+  .choice-head:active { background: var(--sand); }
+  .choice-time { font-size: 11px; font-weight: 500; color: var(--ink-faint); min-width: 52px; padding-top: 2px; flex-shrink: 0; }
+  .choice-body { flex: 1; min-width: 0; }
+  .pick-label { font-size: 10px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; background: var(--ocean-pale); color: var(--ocean); padding: 2px 8px; border-radius: 99px; margin-right: 6px; }
+  .choice-title { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .choice-sub { font-size: 12px; color: var(--ink-muted); margin-top: 3px; }
+  .chevron { font-size: 14px; color: var(--ink-faint); flex-shrink: 0; margin-top: 1px; transition: transform .25s; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .options { display: none; border-top: 1px solid var(--border); }
+  .options.open { display: block; }
+  .option { padding: 13px 16px; border-bottom: 1px solid var(--border); }
+  .option:last-child { border-bottom: none; }
+  .opt-name { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .opt-vibe { font-size: 11px; color: var(--ink-faint); font-style: italic; margin-bottom: 4px; }
+  .opt-order { font-size: 12px; color: var(--ink-muted); line-height: 1.55; }
+  .opt-tip { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 500; background: var(--terracotta-pale); color: var(--terracotta); padding: 3px 9px; border-radius: 8px; }
+
+  .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .guide-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 13px 14px; box-shadow: var(--shadow); }
+  .guide-name { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 5px; line-height: 1.3; }
+  .guide-desc { font-size: 11px; color: var(--ink-muted); line-height: 1.55; }
+
+  .footer-tip { margin-top: 20px; padding: 14px 16px; background: var(--sand); border-radius: 12px; font-size: 12px; color: var(--ink-muted); line-height: 1.6; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--ink-muted); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Group Trip Itinerary</div>
+    <div class="hero-title">Iloilo City 🌴</div>
+    <div class="hero-sub">June 12–16 · 3 Groups · Food-first · Megaworld IBP</div>
+    <div class="hero-chips">
+      <span class="chip">✈ 3 flight groups</span>
+      <span class="chip">🏝 Guimaras day trip</span>
+      <span class="chip">🍜 UNESCO Gastronomy City</span>
+    </div>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav">
+    <button class="nav-btn active" onclick="show('d12',this)">Jun 12</button>
+    <button class="nav-btn" onclick="show('d13',this)">Jun 13</button>
+    <button class="nav-btn" onclick="show('d14',this)">Jun 14 🏝</button>
+    <button class="nav-btn" onclick="show('d15',this)">Jun 15</button>
+    <button class="nav-btn" onclick="show('d16',this)">Jun 16</button>
+    <button class="nav-btn" onclick="show('food',this)">🍜 Order Guide</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- JUN 12 -->
+<div class="day-panel active" id="d12">
+  <div class="notice n-info">📍 Tonight's stops are all a short ride from Megaworld IBP. Easy first night — no rushing.</div>
+  <div class="legend">
+    <span class="legend-item"><span class="badge b-fly">✈</span>Flight</span>
+    <span class="legend-item"><span class="badge b-food">🍜</span>Food</span>
+    <span class="legend-item"><span class="badge b-cake">🎂</span>Merienda</span>
+    <span class="legend-item"><span class="badge b-see">👁</span>Sightseeing</span>
+    <span class="legend-item"><span class="badge b-free">💤</span>Free time</span>
+  </div>
+  <div class="zone">Groups 1 & 2 — own time</div>
+  <div class="card"><div class="card-row"><div class="card-time">12:45 pm</div><div class="card-body"><div class="card-title"><span class="badge b-fly">✈</span>Group 1 lands · check in</div><div class="card-note">Settle in at Megaworld. Festive Walk is right outside if anyone wants to wander.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">2:05 pm</div><div class="card-body"><div class="card-title"><span class="badge b-fly">✈</span>Group 2 lands · check in</div><div class="card-note">Freshen up, meet Group 1 at the lobby when ready.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">4:45 pm</div><div class="card-body"><div class="card-title"><span class="badge b-fly">✈</span>Group 3 lands — itinerary starts!</div><div class="card-note">All meet at hotel once Group 3 has settled. Head out by 5:30 pm.</div></div></div></div>
+  <div class="zone">All groups — evening</div>
+  <div class="card"><div class="card-row"><div class="card-time">5:30 pm</div><div class="card-body"><div class="card-title"><span class="badge b-food">🍜</span>First bowl — Ted's Old Timer La Paz Batchoy</div><div class="card-note">Nearest branch to Megaworld. Air-conditioned and consistent — perfect for the whole group arriving tired. Save the wet market experience for Jun 13!</div><div class="tip">🥣 Order the special bowl. Ask for extra broth (libre!)</div></div></div></div>
+  <div class="choice">
+    <div class="choice-head" onclick="toggle(this)"><div class="choice-time">7:30 pm</div><div class="choice-body"><div><span class="pick-label">PICK ONE</span><span class="choice-title">Dinner — Villa Beach</span></div><div class="choice-sub">Both iconic. Both at Villa Beach, ~10 min from Megaworld.</div></div><div class="chevron">▾</div></div>
+    <div class="options">
+      <div class="option"><div class="opt-name">🐟 Breakthrough Restaurant</div><div class="opt-vibe">Massive beachfront dining, open-air, perfect for groups.</div><div class="opt-order">Baked Talaba (garlic & cheese), Aligue Rice, Managat fish (grilled or sinigang). Pay-by-weight fresh seafood.</div><div class="opt-tip">📞 Book ahead for large groups!</div></div>
+      <div class="option"><div class="opt-name">🐔 Tatoy's Manokan & Seafood</div><div class="opt-vibe">Casual native pavilion style, fierce Breakthrough rival.</div><div class="opt-order">Native Lechon Manok (charcoal-roasted, lemongrass-marinated), Kamonsil (baked scallops).</div><div class="opt-tip">📞 Book ahead for large groups!</div></div>
+    </div>
+  </div>
+  <div class="card"><div class="card-row"><div class="card-time">9:30 pm</div><div class="card-body"><div class="card-title"><span class="badge b-free">💤</span>Wind down — Festive Walk or Smallville</div><div class="card-note">Both steps from Megaworld. Grab a drink, dessert, or call it a night.</div></div></div></div>
+</div>
+
+<!-- JUN 13 -->
+<div class="day-panel" id="d13">
+  <div class="notice n-info">📍 Morning: La Paz Market (20 min). Midday: Molo Church (15 min from La Paz). Afternoon: back to Mandurriao — Roberto's and Maridel's are both close to Megaworld.</div>
+  <div class="zone">Morning — La Paz Market</div>
+  <div class="card"><div class="card-row"><div class="card-time">7:30 am</div><div class="card-body"><div class="card-title"><span class="badge b-food">🍜</span>Breakfast — Netong's Original Special La Paz Batchoy</div><div class="card-note">Inside La Paz Public Market. Sweaty, chaotic, authentic — the OG experience every Ilonggo will tell you about.</div><div class="tip">🥣 Mega Bowl. Ask for extra caldo & chicharon — both free!</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">8:30 am</div><div class="card-body"><div class="card-title"><span class="badge b-cof">☕</span>Madge Cafe — right inside La Paz Market</div><div class="card-note">Iloilo's oldest coffee shop since 1940. Native Arabica beans, brewed through a cloth strainer. Mugs with regulars' names on the walls, celeb photos everywhere.</div><div class="tip">☕ Kapeng Barako + calamansi glazed donuts. Grab puto from market vendors nearby!</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">9:30 am</div><div class="card-body"><div class="card-title"><span class="badge b-see">👁</span>Explore La Paz Market</div><div class="card-note">Wander the stalls — local produce, native delicacies, pasalubong scouting. Biscocho, puto, local biscuits all here.</div></div></div></div>
+  <div class="zone">Midday — Molo district</div>
+  <div class="card"><div class="card-row"><div class="card-time">10:30 am</div><div class="card-body"><div class="card-title"><span class="badge b-see">👁</span>Molo Church</div><div class="card-note">The "feminist church" — historically administered by women. Stunning Spanish heritage architecture, one of the most photographed in the Visayas.</div></div></div></div>
+  <div class="choice">
+    <div class="choice-head" onclick="toggle(this)"><div class="choice-time">11:30 am</div><div class="choice-body"><div><span class="pick-label">PICK ONE</span><span class="choice-title">Merienda — Pancit Molo</span></div><div class="choice-sub">Both right beside Molo Church.</div></div><div class="chevron">▾</div></div>
+    <div class="options">
+      <div class="option"><div class="opt-name">🏠 Kap Isko (K.P.S.)</div><div class="opt-vibe">Heritage dining, very local, budget-friendly.</div><div class="opt-order">Traditional Pancit Molo — wonton soup with shredded chicken and shrimp broth. Try the fried molo balls!</div></div>
+      <div class="option"><div class="opt-name">🏛 Molo Mansion Café</div><div class="opt-vibe">Restored ancestral home, more atmospheric setting.</div><div class="opt-order">Pancit Molo, local biscuits, tskolate batirol. Reservation recommended.</div></div>
+    </div>
+  </div>
+  <div class="zone">Afternoon — back to Mandurriao</div>
+  <div class="card"><div class="card-row"><div class="card-time">1:30 pm</div><div class="card-body"><div class="card-title"><span class="badge b-food">🍜</span>Lunch — Roberto's (Calle Real)</div><div class="card-note">A no-frills historic hole-in-the-wall. Expect a line — worth it.</div><div class="tip">🥟 Queen Siopao (bacon, Chinese sausage, chicken, pork adobo, salted egg). Select days only — if unavailable, get The King!</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">3:00 pm</div><div class="card-body"><div class="card-title"><span class="badge b-see">👁</span>Iloilo River Esplanade stroll</div><div class="card-note">Walkable riverside promenade. Afternoon breeze, great group photo spot. Minutes from Megaworld.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">4:30 pm</div><div class="card-body"><div class="card-title"><span class="badge b-cake">🎂</span>Merienda — Maridel's Cafe</div><div class="card-note">Iloilo's beloved dessert cafe at Plazuela de Iloilo, beside SM City — very close to Megaworld. Famous for specialty cakes, frozen desserts, and creative pastries. Small and cozy inside — expect it to be busy!</div><div class="tip">🍰 Must-try: Mango Brazos (ice cream + fresh mangoes), Frozen Lemon Meringue, Death by Chocolate, Snickers Pie. Eat the ice cream cakes fast — they melt!</div></div></div></div>
+  <div class="choice">
+    <div class="choice-head" onclick="toggle(this)"><div class="choice-time">7:00 pm</div><div class="choice-body"><div><span class="pick-label">PICK ONE</span><span class="choice-title">Dinner — whichever Villa Beach spot you missed</span></div><div class="choice-sub">Or keep it local at Smallville.</div></div><div class="chevron">▾</div></div>
+    <div class="options">
+      <div class="option"><div class="opt-name">🐟 Breakthrough Restaurant</div><div class="opt-vibe">If you did Tatoy's last night.</div><div class="opt-order">Baked Talaba, Aligue Rice, Managat grilled or sinigang.</div></div>
+      <div class="option"><div class="opt-name">🐔 Tatoy's Manokan</div><div class="opt-vibe">If you did Breakthrough last night.</div><div class="opt-order">Native Lechon Manok, Kamonsil (baked scallops).</div></div>
+      <div class="option"><div class="opt-name">🦪 Y2K Talabahan (Smallville)</div><div class="opt-vibe">Casual, open-air, local crowd. Steps from Megaworld.</div><div class="opt-order">Fresh oysters, grilled seafood, cold drinks.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- JUN 14 -->
+<div class="day-panel" id="d14">
+  <div class="notice n-suc">🏝 All 3 groups together! Ortiz Wharf is ~15 min from Megaworld. Leave early to max out the island.</div>
+  <div class="zone">Morning — ferry & island tour</div>
+  <div class="card"><div class="card-row"><div class="card-time">6:30 am</div><div class="card-body"><div class="card-title"><span class="badge b-cof">☕</span>Quick breakfast — Madge Cafe Atria branch</div><div class="card-note">Short walk from Megaworld. Same legendary coffee, zero commute before the early ferry.</div><div class="tip">☕ Ibos + kapeng barako — classic Madge pairing.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">7:30 am</div><div class="card-body"><div class="card-title"><span class="badge b-fly">✈</span>Ferry to Guimaras — Ortiz Wharf</div><div class="card-note">~30 min pump boat ride. Boats run frequently — no pre-booking needed.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">9:00 am</div><div class="card-body"><div class="card-title"><span class="badge b-see">👁</span>Island tour — tricycles or van</div><div class="card-note">Trappist Monastery (cashews, jams, honey — great pasalubong!), Guimaras Mango Farm, Navalas Church. Hire island tricycles at the wharf.</div></div></div></div>
+  <div class="zone">Midday — eat on the island</div>
+  <div class="card"><div class="card-row"><div class="card-time">12:00 pm</div><div class="card-body"><div class="card-title"><span class="badge b-food">🍜</span>Lunch — Pit Stop Restaurant</div><div class="card-note">The go-to spot on Guimaras. Casual, fresh mango everything, local dishes.</div><div class="tip">🍕 Must order: the famous mango pizza! Stock up on mango jam & dried mango for pasalubong.</div></div></div></div>
+  <div class="zone">Afternoon — free time</div>
+  <div class="card"><div class="card-row"><div class="card-time">2:00 pm</div><div class="card-body"><div class="card-title"><span class="badge b-free">💤</span>Group decides — beach, explore, or head back</div><div class="card-note">Taklong Island, Guisi Lighthouse, more mango-eating — or an early ferry back for rest.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">4:00 pm</div><div class="card-body"><div class="card-title"><span class="badge b-fly">✈</span>Ferry back to Iloilo · rest at Megaworld</div><div class="card-note">Full island day — freshen up before dinner.</div></div></div></div>
+  <div class="zone">Evening — near Megaworld</div>
+  <div class="choice">
+    <div class="choice-head" onclick="toggle(this)"><div class="choice-time">7:00 pm</div><div class="choice-body"><div><span class="pick-label">PICK ONE</span><span class="choice-title">Dinner — easy post-island options</span></div><div class="choice-sub">Keep it close to Megaworld tonight.</div></div><div class="chevron">▾</div></div>
+    <div class="options">
+      <div class="option"><div class="opt-name">🍲 Ponsyon by Breakthrough</div><div class="opt-vibe">City branch of Breakthrough — same quality, easier to book.</div><div class="opt-order">Binakol na Manok, sizzling kansi, crispy pata, fresh seafood.</div></div>
+      <div class="option"><div class="opt-name">🥢 Ang Kamalig</div><div class="opt-vibe">Home of Ilonggo cuisine — warm, local, unhurried.</div><div class="opt-order">KBL, binakol, crispy pata, fresh lumpia.</div></div>
+      <div class="option"><div class="opt-name">🌙 Festive Walk food strip</div><div class="opt-vibe">Zero travel — right at your hotel.</div><div class="opt-order">Mix of casual dining. No commitment, everyone picks what they want.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- JUN 15 -->
+<div class="day-panel" id="d15">
+  <div class="notice n-warn">✈ Group 2 flies out 11 pm — wrap dinner by 8:30 pm. Airport by 9 pm.</div>
+  <div class="zone">Morning — south of Iloilo (40 min drive)</div>
+  <div class="card"><div class="card-row"><div class="card-time">8:00 am</div><div class="card-body"><div class="card-title"><span class="badge b-food">🍜</span>Breakfast — Popoy's Batchoy (Central Market)</div><div class="card-note">Slightly sweeter, richer broth — the local-local favorite. Compare notes with Netong's from Jun 13!</div><div class="tip">🥣 Special bowl — settle the Netong's vs Popoy's debate once and for all.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">9:30 am</div><div class="card-body"><div class="card-title"><span class="badge b-see">👁</span>Miag-ao Church</div><div class="card-note">UNESCO World Heritage Baroque "Fortress Church" — 40 min south. One of the most architecturally unique churches in the Philippines. Back by noon.</div></div></div></div>
+  <div class="zone">Midday — back in Iloilo</div>
+  <div class="card"><div class="card-row"><div class="card-time">12:30 pm</div><div class="card-body"><div class="card-title"><span class="badge b-food">🍜</span>Lunch — Kansi at Patpat's Kansi House (Jaro)</div><div class="card-note">Stop here on the drive back from Miag-ao — Jaro is on the route. Sour beef marrow soup with batwan fruit. Iloilo's proudest original dish.</div><div class="tip">🍲 Order with extra bone marrow. Nothing else on this trip tastes like this.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">2:30 pm</div><div class="card-body"><div class="card-title"><span class="badge b-free">💤</span>Free afternoon — rest, Villa Beach, or pasalubong run</div><div class="card-note">Waterfront stroll, last pasalubong shopping (Iloilo biscuits, biscocho, mango jam), or just hotel rest.</div></div></div></div>
+  <div class="zone">Evening — send-off dinner</div>
+  <div class="choice">
+    <div class="choice-head" onclick="toggle(this)"><div class="choice-time">6:30 pm</div><div class="choice-body"><div><span class="pick-label">PICK ONE</span><span class="choice-title">Send-off dinner — all groups!</span></div><div class="choice-sub">Last meal together. Make it count.</div></div><div class="chevron">▾</div></div>
+    <div class="options">
+      <div class="option"><div class="opt-name">🐔 Tatoy's Manokan <span style="font-size:11px;opacity:.6">(if not done yet)</span></div><div class="opt-vibe">The daraag is the farewell meal Iloilo is famous for.</div><div class="opt-order">Native Lechon Manok, Kamonsil. The perfect Iloilo goodbye.</div><div class="opt-tip">📞 Book ahead!</div></div>
+      <div class="option"><div class="opt-name">🐟 Breakthrough Restaurant <span style="font-size:11px;opacity:.6">(if not done yet)</span></div><div class="opt-vibe">Beachfront, festive, great for a big group send-off.</div><div class="opt-order">Baked Talaba, Aligue Rice, Managat sinigang. Order a full spread!</div><div class="opt-tip">📞 Book ahead!</div></div>
+      <div class="option"><div class="opt-name">🍲 Ponsyon by Breakthrough</div><div class="opt-vibe">Closer, easier to book, same quality feast.</div><div class="opt-order">Binakol, sizzling kansi, crispy pata. Ponsyon = Ilonggo for "feast."</div></div>
+    </div>
+  </div>
+  <div class="card"><div class="card-row"><div class="card-time">9:00 pm</div><div class="card-body"><div class="card-title"><span class="badge b-fly">✈</span>Group 2 departs — ILO-MNL 11:00 pm</div><div class="card-note">Head to airport by 9 pm. Safe flight! 👋</div></div></div></div>
+</div>
+
+<!-- JUN 16 -->
+<div class="day-panel" id="d16">
+  <div class="notice n-info">😌 Slowest morning of the trip. Groups 1 & 3 only — no rush.</div>
+  <div class="zone">Final morning</div>
+  <div class="card"><div class="card-row"><div class="card-time">7:30 am</div><div class="card-body"><div class="card-title"><span class="badge b-food">🍜</span>Final bowl — Netong's or Ted's + Madge Cafe</div><div class="card-note">One last batchoy before heading home. Netong's and Madge are side by side in La Paz Market — do both in one stop.</div><div class="tip">☕ Last kapeng barako + calamansi donuts. Take the empty milk can as a souvenir!</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">9:00 am</div><div class="card-body"><div class="card-title"><span class="badge b-free">💤</span>Last stroll + final pasalubong</div><div class="card-note">Festive Walk for any last-minute shopping — Iloilo biscuits, biscocho, dried fish, mango jam.</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">10:00 am</div><div class="card-body"><div class="card-title"><span class="badge b-fly">✈</span>Group 1 — airport by 10 am · flight 12:00 pm</div><div class="card-note">Safe flight! ✈</div></div></div></div>
+  <div class="card"><div class="card-row"><div class="card-time">11:00 am</div><div class="card-body"><div class="card-title"><span class="badge b-fly">✈</span>Group 3 — airport by 11 am · flight 1:00 pm</div><div class="card-note">One extra hour for one final coffee. Safe flight! ✈</div></div></div></div>
+</div>
+
+<!-- ORDER GUIDE -->
+<div class="day-panel" id="food">
+  <div class="notice n-info">Every restaurant on the itinerary — what to order and the insider tip.</div>
+  <div class="guide-grid">
+    <div class="guide-card"><div class="guide-name">Netong's Batchoy</div><div class="guide-desc">Mega Bowl + ask for extra caldo & chicharon (libre!). Inside La Paz Market — the OG wet market experience.</div></div>
+    <div class="guide-card"><div class="guide-name">Popoy's Batchoy</div><div class="guide-desc">Sweeter, richer broth. Central Market. The local-local favorite — compare with Netong's!</div></div>
+    <div class="guide-card"><div class="guide-name">Ted's Old Timer</div><div class="guide-desc">Air-conditioned, consistent. Best for tired arrival days. Multiple branches near Megaworld.</div></div>
+    <div class="guide-card"><div class="guide-name">Madge Cafe</div><div class="guide-desc">Since 1940. Kapeng Barako + calamansi donuts. La Paz Market (original) or Atria branch near Megaworld.</div></div>
+    <div class="guide-card"><div class="guide-name">Roberto's Siopao</div><div class="guide-desc">Calle Real. Queen Siopao (bacon, sausage, chicken, adobo, salted egg) — select days only. If unavailable: The King.</div></div>
+    <div class="guide-card"><div class="guide-name">Pancit Molo</div><div class="guide-desc">Kap Isko's or Molo Mansion beside Molo Church. Wonton soup, shredded chicken, shrimp broth. Try fried molo balls!</div></div>
+    <div class="guide-card"><div class="guide-name">Maridel's Cafe 🎂</div><div class="guide-desc">Plazuela de Iloilo, near Megaworld. Mango Brazos, Frozen Lemon Meringue, Death by Chocolate, Snickers Pie. Eat ice cream cakes fast — they melt!</div></div>
+    <div class="guide-card"><div class="guide-name">Breakthrough</div><div class="guide-desc">Villa Beach. Baked Talaba, Aligue Rice, Managat (grilled or sinigang). Book ahead for groups!</div></div>
+    <div class="guide-card"><div class="guide-name">Tatoy's Manokan</div><div class="guide-desc">Villa Beach. Native Lechon Manok (lemongrass, charcoal-roasted), Kamonsil (baked scallops). Book ahead!</div></div>
+    <div class="guide-card"><div class="guide-name">Pit Stop, Guimaras</div><div class="guide-desc">Mango pizza — a must! Fresh mangoes, mango jam & dried mango for pasalubong.</div></div>
+    <div class="guide-card"><div class="guide-name">Patpat's Kansi House</div><div class="guide-desc">Jaro. Sour beef marrow soup with batwan fruit. Extra bone marrow. Stop on the Miag-ao drive back.</div></div>
+    <div class="guide-card"><div class="guide-name">Ponsyon by Breakthrough</div><div class="guide-desc">City branch, easier to book. Binakol, sizzling kansi, crispy pata. Ponsyon = Ilonggo for "feast."</div></div>
+    <div class="guide-card"><div class="guide-name">Ang Kamalig</div><div class="guide-desc">Home of Ilonggo cuisine. KBL, binakol, crispy pata, fresh lumpia. Cozy, family-style, great value.</div></div>
+    <div class="guide-card"><div class="guide-name">Y2K Talabahan</div><div class="guide-desc">Smallville strip. Fresh oysters, grilled seafood. Casual, open-air, local crowd. Steps from Megaworld.</div></div>
+  </div>
+  <div class="footer-tip">💡 <strong>Pro tips:</strong> Netong's + Madge Cafe are side by side in La Paz Market — do both in one morning. Breakthrough and Tatoy's are next to each other at Villa Beach — pick one each night to try both. Maridel's is at Plazuela de Iloilo, right beside Ponsyon — grab dessert there after dinner too!</div>
+</div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggle(head) {
+  const opts = head.nextElementSibling;
+  const chev = head.querySelector('.chevron');
+  const isOpen = opts.classList.toggle('open');
+  chev.classList.toggle('open', isOpen);
+}
+</script>
+</body>
+</html>
